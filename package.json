@@ -1,0 +1,24 @@
+{
+  "name": "buffer-api",
+  "version": "0.0.0",
+  "description": "Node wrapper for the Buffer API.",
+  "main": "lib/buffer-api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/colinscape/buffer-api.git"
+  },
+  "keywords": [
+    "buffer",
+    "api"
+  ],
+  "author": "Colin Ross <colin@colinscape.com> (http://colinscape.com)",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "6084c493ccaab790647bf0cf9217a578cdfb76c7",
+  "dependencies": {
+    "request": "~2.12.0"
+  }
+}
