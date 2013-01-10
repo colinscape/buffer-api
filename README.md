@@ -1,5 +1,5 @@
-Bufferffer.
-======
+Buffer API
+==========
 
 Node wrapper for the Buffer API.
 
