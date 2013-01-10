@@ -30,3 +30,16 @@ Usage
     console.log "Activity: #{new Date user.activity_at}"
 </pre>
 
+Note
+----
+
+This library is very incomplete as it stands.
+
+The only functionality available is to get the user object.
+
+More functionality will come in time.
+
+License
+-------
+
+MIT
