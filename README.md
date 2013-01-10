@@ -15,27 +15,25 @@ Usage
 
 ### CoffeeScript
 
-<pre>
-  Buffer = require 'buffer-api'
+	Buffer = require 'buffer-api'
 
-  access_token = XXX
-  api = new Buffer access_token
+ 	access_token = XXX
+	api = new Buffer access_token
 
-  api.getUserInfo (err, user) ->
+	api.getUserInfo (err, user) ->
 
-    if err? then return console.log "Error: #{err}"
+	if err? then return console.log "Error: #{err}"
 
-    console.log "Name: #{user.name}""
-    console.log "Created: #{new Date user.created_at}"
-    console.log "Activity: #{new Date user.activity_at}"
+	  console.log "Name: #{user.name}""
+	  console.log "Created: #{new Date user.created_at}"
+	  console.log "Activity: #{new Date user.activity_at}"
 
-  api.getProfileInfo (err, profiles) ->
+	api.getProfileInfo (err, profiles) ->
 
-    if err? then return console.log "Error: #{err}"
+	  if err? then return console.log "Error: #{err}"
 
-    for profile in profiles
-      console.log "#{profile.service_username} @ #{profile.service}"
-</pre>
+	  for profile in profiles
+	    console.log "#{profile.service_username} @ #{profile.service}"
 
 Note
 ----
