@@ -6,9 +6,9 @@ Node wrapper for the Buffer API.
 Installation
 ------------
 
-<pre>
+
 	$ npm install buffer-api
-</pre>
+
 
 Usage
 -----
