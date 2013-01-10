@@ -7,7 +7,7 @@ Installation
 ------------
 
 <pre>
-	$ npm install buffer
+	$ npm install buffer-api
 </pre>
 
 Usage
@@ -16,7 +16,7 @@ Usage
 ### CoffeeScript
 
 <pre>
-  Buffer = require 'buffer'
+  Buffer = require 'buffer-api'
 
   access_token = XXX
   api = new Buffer access_token
