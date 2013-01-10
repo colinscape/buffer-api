@@ -28,6 +28,13 @@ Usage
     console.log "Name: #{user.name}""
     console.log "Created: #{new Date user.created_at}"
     console.log "Activity: #{new Date user.activity_at}"
+
+  api.getProfileInfo (err, profiles) ->
+
+    if err? then return console.log "Error: #{err}"
+
+    for profile in profiles
+      console.log "#{profile.service_username} @ #{profile.service}"
 </pre>
 
 Note
@@ -35,7 +42,7 @@ Note
 
 This library is very incomplete as it stands.
 
-The only functionality available is to get the user object.
+The only functionality available is to get the user and profile objects.
 
 More functionality will come in time.
 
