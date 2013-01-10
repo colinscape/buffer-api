@@ -4,7 +4,8 @@
   "description": "Node wrapper for the Buffer API.",
   "main": "lib/buffer-api.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "cake compile"
   },
   "repository": {
     "type": "git",
