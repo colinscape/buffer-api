@@ -35,6 +35,21 @@ Usage
 	  for profile in profiles
 	    console.log "#{profile.service_username} @ #{profile.service}"
 
+	link = "http://bufferapp.com"
+	api.getLinks link, (err, info) =>
+
+	  if err? then return console.log "Error: #{err}"
+
+	  console.log "Links to #{link} : #{info.shares}"
+
+	api.getConfiguration (err, config) ->
+
+	  if err? then return console.log "Error: #{err}"
+
+	  console.log "Supported services:"
+	  console.log service for service,info of config.services
+
+
 Note
 ----
 

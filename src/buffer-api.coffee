@@ -19,7 +19,6 @@ class BufferAPI
     url = "https://api.bufferapp.com/1/user.json?access_token=#{@access_token}"
     request.get url, (err, resp, body) -> parseBody err, resp, body, cb
 
-
   getProfileInfo: (cb) ->
     url = "https://api.bufferapp.com/1/profiles.json?access_token=#{@access_token}"
     request.get url, (err, resp, body) -> parseBody err, resp, body, cb
@@ -27,6 +26,10 @@ class BufferAPI
   getLinks: (link, cb) ->
     encodedLink = encodeURIComponent link
     url = "https://api.bufferapp.com/1/links/shares.json?access_token=#{@access_token}&url=#{encodedLink}"
+    request.get url, (err, resp, body) -> parseBody err, resp, body, cb
+
+  getConfiguration: (cb) ->
+    url = "https://api.bufferapp.com/1/info/configuration.json?access_token=#{@access_token}"
     request.get url, (err, resp, body) -> parseBody err, resp, body, cb
 
 module.exports = BufferAPI
