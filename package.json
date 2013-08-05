@@ -20,6 +20,6 @@
   "readmeFilename": "README.md",
   "gitHead": "6084c493ccaab790647bf0cf9217a578cdfb76c7",
   "dependencies": {
-    "request": "~2.12.0"
+    "request": "2.12.0"
   }
 }
