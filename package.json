@@ -4,7 +4,7 @@
   "description": "Node wrapper for the Buffer API.",
   "main": "lib/buffer-api.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register -R spec",
     "prepublish": "cake compile"
   },
   "repository": {
@@ -20,6 +20,9 @@
   "readmeFilename": "README.md",
   "gitHead": "6084c493ccaab790647bf0cf9217a578cdfb76c7",
   "dependencies": {
-    "request": "2.12.0"
+    "request": "2.*.*"
+  },
+  "devDependencies": {
+    "mocha": "~1.18.2"
   }
 }
