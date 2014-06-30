@@ -1,83 +1,68 @@
-
+User = require './endpoints/user'
+Profile = require './endpoints/profile'
+Links = require './endpoints/links'
+Info = require './endpoints/info'
+Updates = require './endpoints/updates'
+APIEndpoint = require './endpoints/endpoint'
+API = require './api'
 request = require 'request'
 
-parseBody = (err, resp, body, cb) ->
-  if err? then return cb err
-
-  try
-    obj = JSON.parse body
-  catch e
-    console.log body
-    return cb e
-  return cb null, obj
-
 class BufferAPI
-  constructor: (@access_token) ->
-    @uri = "https://api.bufferapp.com/1";
-    @access_token_suffix = "access_token="+@access_token;
 
-  getUserInfo: (cb) ->
-    url = "#{@uri}/user.json?#{@access_token_suffix}"
-    request.get url, (err, resp, body) -> parseBody err, resp, body, cb
+  constructor: (access_token) ->
+    @api = new API(access_token)
+    @user = new User(@api)
+    @profile = new Profile(@api)
+    @links = new Links(@api)
+    @info = new Info(@api)
+    @updates = new Updates(@api)
 
-  getProfileInfo: (cb) ->
-    url = "#{@uri}/profiles.json?#{@access_token_suffix}"
-    request.get url, (err, resp, body) -> parseBody err, resp, body, cb
+  getUserInfo: (callback) ->
+    @user.info(callback)
 
-  getLinks: (link, cb) ->
-    encodedLink = encodeURIComponent link
-    url = "#{@uri}/links/shares.json?#{@access_token_suffix}&url=#{encodedLink}"
-    request.get url, (err, resp, body) -> parseBody err, resp, body, cb
+  getProfileInfo: (callback) ->
+    @profile.info(callback)
 
-  getConfiguration: (cb) ->
-    url = "#{@uri}/info/configuration.json?#{@access_token_suffix}"
-    request.get url, (err, resp, body) -> parseBody err, resp, body, cb
+  getLinks: (link, callback) ->
+    @links.shares(link, callback)
+
+  getConfiguration: (callback) ->
+    @info.configuration(callback)
 
   ## UPDATES
   # GET
-  getUpdate: (update_id, cb) ->  
-    url = "#{@uri}/updates/#{update_id}.json?#{@access_token_suffix}"
-    request.get url, (err, resp, body) -> parseBody err, resp, body, cb
+  getUpdate: (update_id, callback) ->
+    @updates.get(update_id, callback)
 
-  getUpdateInteractions: (update_id, cb) ->
-    url = "#{@uri}/updates/#{update_id}/interactions.json?#{@access_token_suffix}"
-    request.get url, (err, resp, body) -> parseBody err, resp, body, cb
+  getPendingUpdates: (profile_id, callback) ->
+    @updates.pending_for(profile_id, callback)
 
-  getPendingUpdates: (profile_id, cb) ->
-    url = "#{@uri}/profiles/#{profile_id}/updates/pending.json?#{@access_token_suffix}"
-    request.get url, (err, resp, body) -> parseBody err, resp, body, cb
+  getSentUpdates: (profile_id, callback) ->
+    @updates.sent_for(profile_id, callback)
 
-  getSentUpdates: (profile_id, cb) ->
-    url = "#{@uri}/profiles/#{@profile_id}/updates/sent.json?#{@access_token_suffix}"
-    request.get url, (err, resp, body) -> parseBody err, resp, body, cb
+  getUpdateInteractions: (update_id, callback) ->
+    @updates.interactions_for(update_id, callback)
 
   # POST
-  reorderUpdates: (profile_id, parameters, cb) ->
-    url = url = "#{@uri}/profiles/#{profile_id}/updates/reorder.json?#{@access_token_suffix}"
-    request.post url, form: parameters, (err, resp, body) -> parseBody err, resp, body, cb
+  reorderUpdates: (profile_id, parameters, callback) ->
+    @updates.reorder(profile_id, parameters, callback)
 
-  shuffleUpdates: (profile_id, parameters, cb) ->
-    url = "#{@uri}/profiles/#{profile_id}/updates/shuffle.json?#{@access_token_suffix}"
-    request.post url, form: parameters, (err, resp, body) -> parseBody err, resp, body, cb
+  shuffleUpdates: (profile_id, parameters, callback) ->
+    @updates.shuffle(profile_id, parameters, callback)
 
-  createUpdate: (parameters, cb) ->
-    url = "#{@uri}/updates/create.json?#{@access_token_suffix}"
-    request.post url, form: parameters, (err, resp, body) -> parseBody err, resp, body, cb
+  createUpdate: (parameters, callback) ->
+    @updates.create(parameters, callback)
 
-  editUpdate: (update_id, parameters, cb) ->
-    url = "#{@uri}/updates/#{update_id}/update.json?#{@access_token_suffix}"
-    request.post url, form: parameters, (err, resp, body) -> parseBody err, resp, body, cb
+  editUpdate: (update_id, parameters, callback) ->
+    @updates.edit(update_id, parameters, callback)
 
-  shareUpdate: (update_id, cb) ->
-    url = "#{@uri}/updates/#{update_id}/share.json?#{@access_token_suffix}"
-    request.post url, (err, resp, body) -> parseBody err, resp, body, cb
+  shareUpdate: (update_id, callback) ->
+    @updates.share(update_id, callback)
 
-  deleteUpdate: (update_id, cb) ->
-    url = "#{@uri}/updates/#{update_id}/destroy.json?#{@access_token_suffix}"
-    request.post url, (err, resp, body) -> parseBody err, resp, body, cb
+  deleteUpdate: (update_id, callback) ->
+    @updates.delete(update_id, callback)
 
-  moveUpdateToTop: (update_id, cb) ->
-    url = "#{@uri}/updates/#{update_id}/move_to_top.json?#{@access_token_suffix}"
-    request.post url, (err, resp, body) -> parseBody err, resp, body, cb
+  moveUpdateToTop: (update_id, callback) ->
+    @updates.toTop(update_id, callback)
 
 module.exports = BufferAPI
